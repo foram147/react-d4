@@ -1,5 +1,7 @@
 import React from "react";
-import { Card } from "react-bootstrap";
+import { Card, ListGroup, ListGroupItem } from "react-bootstrap";
+import AddComment from "./AddComment";
+import CommentList from "./CommentList";
 
 class SingleBook extends React.Component {
   state = {
@@ -17,8 +19,16 @@ class SingleBook extends React.Component {
           <Card.Title style={{ color: "black" }}>
             {this.props.book.title}
           </Card.Title>
-          <Card.Text>{this.props}</Card.Text>
         </Card.Body>
+
+        <AddComment asin={this.props.book.asin} />
+        <ListGroupItem>
+          {this.props.selected === this.props.book.asin ? (
+            <CommentList asin={this.props.book.asin} />
+          ) : (
+            console.log("ok")
+          )}
+        </ListGroupItem>
       </Card>
     );
   }

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Component } from "react";
+
 import { Form, Button } from "react-bootstrap";
 
 class AddComment extends Component {
@@ -41,7 +41,7 @@ class AddComment extends Component {
           <Form.Label>Comment</Form.Label>
           <Form.Control
             as="textarea"
-            rows={2}
+            rows={1}
             placeholder="Add Comment"
             value={this.state.comment.comment}
             onChange={(e) =>

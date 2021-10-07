@@ -34,7 +34,7 @@ class CommentList extends Component {
   };
 
   componentDidMount() {
-    this.getComments;
+    this.getComments();
   }
   render() {
     console.log("rendered");

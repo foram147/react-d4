@@ -14,7 +14,7 @@ function App() {
     <div className="App">
       <Warning AlertMessage="Hello" />
       <MyBadge text="NEW!!" color="info" />
-      <SingleBook book={dataBooks[0]}></SingleBook>
+
       <BookList books={dataBooks} />
     </div>
   );
