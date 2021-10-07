@@ -34,6 +34,26 @@ class AddComment extends Component {
     }
   };
 
+  getComment = async () => {
+    try {
+      let response = await fetch(
+        "https://striveschool-api.herokuapp.com/api/comments/" +
+          this.props.asin,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDgxN2M1ZWU3ODE4NzAwMTVjMjY3YTgiLCJpYXQiOjE2MzI5OTY2NjAsImV4cCI6MTYzNDIwNjI2MH0.vI8rqpM89GMD9kO9T6EiPc1QsRLj9alr0aq5ByB0Mgk",
+          },
+        }
+      );
+      const comments = await response.json();
+      this.setState({ comments });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   render() {
     return (
       <Form key={this.props.asin}>
@@ -46,8 +66,7 @@ class AddComment extends Component {
             value={this.state.comment.comment}
             onChange={(e) =>
               this.setState({
-                ...this.setState.comment,
-                comment: e.target.value,
+                comment: { ...this.state.comment, comment: e.target.value },
               })
             }
           />
@@ -59,19 +78,22 @@ class AddComment extends Component {
             type="number"
             placeholder="Rate"
             value={this.state.comment.rate}
-            onChange={(e) =>
-              this.setState({
-                ...this.setState.comment,
-                rate: e.target.value,
-              })
-            }
+            as="select"
           />
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
         </Form.Group>
 
         <Button
           variant="primary"
           type="submit"
-          onChange={(e) => this.createComment(e)}
+          onClick={(e) => {
+            e.preventDefault();
+            this.getComment();
+          }}
         >
           Submit
         </Button>
